@@ -1,0 +1,28 @@
+# Not the latest version, but one I typically use due to familiarity.
+version: "3.7"
+
+# Specify the services that we want.
+services:
+
+  # We give our robot service (container) a name, typically one that distinguishes it from the other services that might be described here (e.g. a database).
+  # The name of the parent folder will be prepended.
+  app:
+
+    # Where do we want to build (i.e. where is our Dockerfile).
+    # NB: Context not explicitly required, but may make our functionality clearer.
+    build: 
+      context: server
+  
+    # Which command do we want to run inside the container (much like the Dockerfile).
+    # NB: Technically this is not needed, but may, again, may help to enhance the documentation of our service.
+    command: ["python", "main.py"]
+  
+    # Actual open the port, mapping from the localhost to inside the container.
+    ports:
+      - 8888:8888
+  
+    # Keep our container running, even in the event of a whole system restart.
+    restart: unless-stopped
+
+ # Add other services, DB etc.
+ # Add volumes, etc.
